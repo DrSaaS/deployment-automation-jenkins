@@ -31,7 +31,7 @@ sudo systemctl status jenkins
 ## Perform initial Jenkins setup.
 ### From our browser access http://<Jenkins-Server-Public-IP-Address-or-Public-DNS-Name>:8080
 
-18.133.75.123:8080
+http://13.41.72.190:8080/
 
 ### You will be prompted to provide a default admin password
 
@@ -44,7 +44,7 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 
 ### Once plugins installation is done – we create an admin user and retrieve Jenkins server address. goldeneyepr Olu...Jen...
 
-http://18.133.75.123:8080/
+http://13.41.72.190:8080/:8080/
 
 ### The installation is completed!
 
@@ -86,6 +86,61 @@ ls /var/lib/jenkins/jobs/tooling_github/builds/<build_number>/archive/
 
 ## CONFIGURE JENKINS TO COPY FILES TO NFS SERVER VIA SSH
 # Step 3 – Configure Jenkins to copy files to NFS server via SSH
+
+### Now we have our artifacts saved locally on Jenkins server, the next step is to copy them to our NFS server to /mnt/apps directory.
+
+
+### Install "Publish Over SSH" plugin.
+###On main dashboard select "Manage Jenkins" and choose "Manage Plugins" menu item.
+
+###On "Available" tab search for "Publish Over SSH" plugin and install it
+
+
+
+# Configure the job/project to copy artifacts over to NFS server.
+
+
+### On main dashboard select "Manage Jenkins" and choose "Configure System" menu item.
+
+## Scroll down to Publish over SSH plugin configuration section and configure it to be able to connect to your NFS server:
+
+## Provide a private key (content of .pem file that you use to connect to NFS server via SSH/Putty)
+
+### Hostname – Private IP address of your NFS server
+### Username – ec2-user (since NFS server is based on EC2 with RHEL 8)
+
+Remote directory – /mnt/apps since our Web Servers use it as a mointing point to retrieve files from the NFS server
+### Test the configuration and make sure the connection returns Success.
+
+### Success displayed
+
+
+ Remember, that TCP port 22 on NFS server must be open to receive SSH connections.
+
+### Make changes to README.md on github
+
+cat /mnt/apps/README.md
+
+# Success changes seen in cat /mnt/apps/README.md
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
