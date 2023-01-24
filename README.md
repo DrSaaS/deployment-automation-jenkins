@@ -2,6 +2,7 @@ TASK
 ----
 Our aim here is to set up a continuous Integration pipeline.
 We shall configure jenkins to copy files to our NFS Server via SSH
+Whenever we push code to our github repository, the webhook will trigger a Jenkins (Publish over SSH plugin installed) build to copy artifacts to our configured NFS Server.
 
 
 STEP 1-  INSTALL AND CONFIGURE JENKINS SERVER
@@ -125,13 +126,16 @@ I will now configure the job/project to copy artifacts over to NFS server.
 - Success displayed
 
 
- Remember, that TCP port 22 on NFS server must be open to receive SSH connections.
+ - Port 22 on NFS server security group must be open to receive SSH connections.
 
-### Make changes to README.md on github
+ Make changes to README.md on github
 
 cat /mnt/apps/README.md
 
 # Success changes seen in cat /mnt/apps/README.md
+![Jenkins copied](https://github.com/deleonab/deployment-automation-jenkins/blob/main/sshtransfersuccessful.JPG?raw=true)
+    
+    
 
 
 
