@@ -57,71 +57,72 @@ http://13.41.72.190:8080/:8080/
 The installation is completed!
 ![Jenkins Ready](https://github.com/deleonab/deployment-automation-jenkins/blob/main/jenkins-ready.JPG?raw=true)
 
-Step 2 – I will configure Jenkins to retrieve source code from GitHub using Webhooks
+STEP 2 – I will configure Jenkins to retrieve source code from GitHub using Webhooks
     
 I will configure a simple Jenkins job/project (these two terms can be used interchangeably). 
 This job will will be triggered by GitHub webhooks and will execute a ‘build’ task to retrieve code from GitHub and store it locally on Jenkins server.
-
-Enable webhooks in our GitHub repository settings
+    
+STEP 3 - Enable webhooks in our GitHub repository settings
+- I will access the github and enable Enable webhooks in our GitHub repository settings
 
 http://18.133.75.123:8080/github-webhook/
 
-## Next step is to go to the Jenkins web console, click "New Item" and create a "Freestyle project"
+- Next step is to go to the Jenkins web console, click "New Item" and create a "Freestyle project"
+    
+- select discard old builds
 
-### select discard old builds
+- Set maximum # of builds to keep to 4
 
-### Set maximum # of builds to keep to 4
-
-### Change branch specifier to main from master
+- Change branch specifier to main from master
 
 */main
 
-### click save
+-click save
 
-### Select checkbox under Build Triggers - GitHub hook trigger for GITScm polling
+- Select checkbox under Build Triggers - GitHub hook trigger for GITScm polling
 
-### I made some changes in the README.MD file) and pushed the changes to the main branch (commit on git website).
+- I made some changes in the README.MD file) and pushed the changes to the main branch (commit on git website).
 
-### A new build was launched automatically (by webhook) 
+- A new build was launched automatically (by webhook) 
 and the results – artifacts, saved on Jenkins server.
 
+![Jenkins Build](https://github.com/deleonab/deployment-automation-jenkins/blob/main/jenkins-build.JPG?raw=true)    
 
-## We have now configured an automated Jenkins job that receives files from GitHub by webhook trigger (this method is considered as ‘push’ because the changes are being ‘pushed’ and files transfer is initiated by GitHub). There are also other methods: trigger one job (downstreadm) from another (upstream), poll GitHub periodically and others.
+We have now configured an automated Jenkins job that receives files from GitHub by webhook trigger (this method is considered as ‘push’ because the changes are being ‘pushed’ and files transfer is initiated by GitHub). There are also other methods: trigger one job (downstreadm) from another (upstream), poll GitHub periodically and others.
 
-### By default, the artifacts are stored on Jenkins server locally
-
+By default, the artifacts are stored on Jenkins server locally
+```
 ls /var/lib/jenkins/jobs/tooling_github/builds/<build_number>/archive/
+```
 
 
-## CONFIGURE JENKINS TO COPY FILES TO NFS SERVER VIA SSH
-# Step 3 – Configure Jenkins to copy files to NFS server via SSH
+STEP 4 – I will configure Jenkins to copy files to our NFS server via SSH
 
-### Now we have our artifacts saved locally on Jenkins server, the next step is to copy them to our NFS server to /mnt/apps directory.
-
-
-### Install "Publish Over SSH" plugin.
-###On main dashboard select "Manage Jenkins" and choose "Manage Plugins" menu item.
-
-###On "Available" tab search for "Publish Over SSH" plugin and install it
+Now we have our artifacts saved locally on Jenkins server, the next step is to copy them to our NFS server to /mnt/apps directory.
 
 
+In Jenkins, we shall Install the "Publish Over SSH" plugin.
+- On main dashboard select "Manage Jenkins" and choose "Manage Plugins" menu item.
 
-# Configure the job/project to copy artifacts over to NFS server.
+- On "Available" tab search for "Publish Over SSH" plugin and install it
 
 
-### On main dashboard select "Manage Jenkins" and choose "Configure System" menu item.
+I will now configure the job/project to copy artifacts over to NFS server.
 
-## Scroll down to Publish over SSH plugin configuration section and configure it to be able to connect to your NFS server:
 
-## Provide a private key (content of .pem file that you use to connect to NFS server via SSH/Putty)
+- On the main dashboard select "Manage Jenkins" and choose the "Configure System" menu item.
 
-### Hostname – Private IP address of your NFS server
-### Username – ec2-user (since NFS server is based on EC2 with RHEL 8)
+- Scroll down to Publish over SSH plugin configuration section and configure it to be able to connect to our NFS server:
 
-Remote directory – /mnt/apps since our Web Servers use it as a mointing point to retrieve files from the NFS server
-### Test the configuration and make sure the connection returns Success.
+- Provide a private key (content of .pem file that you we use to connect to NFS server via SSH/Putty)
 
-### Success displayed
+- Hostname – Private IP address of our NFS server
+- Username – ec2-user (since NFS server is based on EC2 with RHEL 8)
+![Jenkins SSH Copy set up](https://github.com/deleonab/deployment-automation-jenkins/blob/main/sshsuccessjenkins.JPG?raw=true)
+- Remote directory – /mnt/apps since our Web Servers use it as a mointing point to retrieve files from the NFS server
+- Let us test the configuration and make sure the connection returns Success.
+
+- Success displayed
 
 
  Remember, that TCP port 22 on NFS server must be open to receive SSH connections.
