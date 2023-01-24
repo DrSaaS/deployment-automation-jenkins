@@ -39,7 +39,6 @@ We will open port 8080 by creating a new Inbound Rule in our Jenkins server EC2 
 - 
 - From our browser access http://<Jenkins-Server-Public-IP-Address-or-Public-DNS-Name>:8080
 
-http://13.41.72.190:8080/
     
     
 
@@ -53,9 +52,7 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
  login successfull
 
 ![Plugin install](https://github.com/deleonab/deployment-automation-jenkins/blob/main/customise-jenkins.JPG?raw=true)
-### Once plugins installation is done – we create an admin user and retrieve Jenkins server address. goldeneyepr Olu...Jen...
-
-http://13.41.72.190:8080/:8080/
+### Once plugins installation is done – we create an admin user and retrieve Jenkins server address. 
 
 The installation is completed!
 ![Jenkins Ready](https://github.com/deleonab/deployment-automation-jenkins/blob/main/jenkins-ready.JPG?raw=true)
@@ -67,8 +64,6 @@ This job will will be triggered by GitHub webhooks and will execute a ‘build�
     
 STEP 3 - Enable webhooks in our GitHub repository settings
 - I will access the github and enable Enable webhooks in our GitHub repository settings
-
-http://18.133.75.123:8080/github-webhook/
 
 - Next step is to go to the Jenkins web console, click "New Item" and create a "Freestyle project"
     
