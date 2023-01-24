@@ -30,7 +30,7 @@ sudo systemctl status jenkins
 ```
 
 ![Jenkins Status](https://github.com/deleonab/deployment-automation-jenkins/blob/main/install-jenkins.JPG?raw=true)
-We will open iport 8080 by creating a new Inbound Rule in our Jenkins server EC2 Security Group
+We will open port 8080 by creating a new Inbound Rule in our Jenkins server EC2 Security Group
 
 - Next we shall set up= Jenkins in the browser
 - 
@@ -49,19 +49,20 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
  ![Jenkins Set up](https://github.com/deleonab/deployment-automation-jenkins/blob/main/unlock-jenkins.JPG?raw=true)   
  login successfull
 
-
+![Plugin install](https://github.com/deleonab/deployment-automation-jenkins/blob/main/customise-jenkins.JPG?raw=true)
 ### Once plugins installation is done – we create an admin user and retrieve Jenkins server address. goldeneyepr Olu...Jen...
 
 http://13.41.72.190:8080/:8080/
 
-### The installation is completed!
+The installation is completed!
+![Jenkins Ready](https://github.com/deleonab/deployment-automation-jenkins/blob/main/jenkins-ready.JPG?raw=true)
 
+Step 2 – I will configure Jenkins to retrieve source code from GitHub using Webhooks
+    
+I will configure a simple Jenkins job/project (these two terms can be used interchangeably). 
+This job will will be triggered by GitHub webhooks and will execute a ‘build’ task to retrieve code from GitHub and store it locally on Jenkins server.
 
-# Step 2 – We configure Jenkins to retrieve source codes from GitHub using Webhooks
-## We configure a simple Jenkins job/project (these two terms can be used interchangeably). 
-This job will will be triggered by GitHub webhooks and will execute a ‘build’ task to retrieve codes from GitHub and store it locally on Jenkins server.
-
-## Enable webhooks in our GitHub repository settings
+Enable webhooks in our GitHub repository settings
 
 http://18.133.75.123:8080/github-webhook/
 
