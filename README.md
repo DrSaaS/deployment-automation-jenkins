@@ -1,7 +1,9 @@
 TASK
 ----
 Our aim here is to set up a continuous Integration pipeline.
+
 We shall configure jenkins to copy files to our NFS Server via SSH
+
 Whenever we push code to our github repository, the webhook will trigger a Jenkins (Publish over SSH plugin installed) build to copy artifacts to our configured NFS Server.
 
 
