@@ -1,44 +1,53 @@
-## TOOLING WEBSITE DEPLOYMENT AUTOMATION WITH CONTINUOUS INTEGRATION USING JENKINS
+TASK
+----
+Our aim here is to set up a continuous Integration pipeline.
+We shall configure jenkins to copy files to our NFS Server via SSH
 
-## INSTALL AND CONFIGURE JENKINS SERVER
-# Step 1 – Install Jenkins server
-###Create an AWS EC2 server based on Ubuntu Server 20.04 LTS and name it "Jenkins"
 
-###Install JDK (since Jenkins is a Java-based application)
+STEP 1-  INSTALL AND CONFIGURE JENKINS SERVER
 
+
+- Spin up an AWS EC2 server based on Ubuntu Server 20.04 LTS and name it "Jenkins"
+
+- Install JDK (since Jenkins is a Java-based application)
+```
 sudo apt update
 sudo apt install default-jdk-headless
-
-## Install Jenkins
+```
+Install Jenkins
+```
 wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
 sudo sh -c 'echo deb https://pkg.jenkins.io/debian-stable binary/ > \
     /etc/apt/sources.list.d/jenkins.list'
 
 sudo apt update
 sudo apt-get install jenkins
-## Make sure Jenkins is up and running
+```
 
+Verify that Jenkins is up and running
+```
 sudo systemctl status jenkins
+```
 
-### By default Jenkins server uses TCP port 8080 
+![Jenkins Status](https://github.com/deleonab/deployment-automation-jenkins/blob/main/install-jenkins.JPG?raw=true)
+We will open iport 8080 by creating a new Inbound Rule in our Jenkins server EC2 Security Group
 
-### We open it by creating a new Inbound Rule in your EC2 Security Group
-
-### Port 8080 opened in inbound rules of Jenkins Server Security group
-
-
-## Perform initial Jenkins setup.
-### From our browser access http://<Jenkins-Server-Public-IP-Address-or-Public-DNS-Name>:8080
+- Next we shall set up= Jenkins in the browser
+- 
+- From our browser access http://<Jenkins-Server-Public-IP-Address-or-Public-DNS-Name>:8080
 
 http://13.41.72.190:8080/
+    
+    
 
-### You will be prompted to provide a default admin password
+You will be prompted to provide a default admin password
 
-### Retrieve password from the jenkins server:
+ Retrieve password from the jenkins server:
 
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 
-### login successfull
+ ![Jenkins Set up](https://github.com/deleonab/deployment-automation-jenkins/blob/main/unlock-jenkins.JPG?raw=true)   
+ login successfull
 
 
 ### Once plugins installation is done – we create an admin user and retrieve Jenkins server address. goldeneyepr Olu...Jen...
